@@ -1,2 +1,5 @@
-# dufflinux.github.io
-A website for the opinionated Void Linux distribution focused on KDE Plasma with BTRFS.🍺
+# Duff Linux Website
+
+This repository hosts the GitHub Pages site for Duff Linux at <https://dufflinux.github.io/>.
+
+The published homepage lives in `index.html`.
