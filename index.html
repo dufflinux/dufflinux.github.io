@@ -1053,9 +1053,47 @@
         align-items: flex-start;
       }
 
-      .nav,
+      .topbar {
+        flex-direction: column;
+        gap: 0.85rem;
+      }
+
+      .brand-wrap {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .nav {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        width: 100%;
+        margin-left: 0;
+        gap: 0.6rem;
+        align-items: stretch;
+      }
+
+      .nav > a:first-child {
+        grid-column: 1 / -1;
+      }
+
       .hero-actions {
         width: 100%;
+      }
+
+      .nav a,
+      .theme-toggle,
+      .sticky-download {
+        width: 100%;
+      }
+
+      .nav a,
+      .theme-toggle {
+        min-height: 2.9rem;
+        padding: 0.72rem 0.9rem;
+      }
+
+      .sticky-download {
+        min-width: 0;
       }
 
       .grid-4,
@@ -1064,7 +1102,12 @@
       }
 
       .hero-copy {
-        padding: 1.3rem;
+        padding: 4.95rem 1.3rem 1.3rem;
+      }
+
+      .mug-foam {
+        inset: -1.35rem 0.65rem auto;
+        height: 2.85rem;
       }
 
       .mug-handle {
