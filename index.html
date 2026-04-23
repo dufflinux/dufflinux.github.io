@@ -154,7 +154,7 @@
     .nav a:hover,
     .button:hover,
     .stat:hover,
-    .step:hover {
+    .feed:hover {
       transform: translateY(-2px);
     }
 
@@ -163,8 +163,7 @@
     }
 
     .panel,
-    .stat,
-    .step {
+    .stat {
       border: 1px solid var(--line);
       background: var(--paper);
       box-shadow: var(--shadow);
@@ -247,8 +246,7 @@
       margin-top: 1.5rem;
     }
 
-    .grid-4,
-    .step-grid {
+    .grid-4 {
       display: grid;
       gap: 1rem;
     }
@@ -257,15 +255,13 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
-    .stat,
-    .step {
+    .stat {
       padding: 1.35rem;
       border-radius: var(--radius-lg);
       transition: transform 160ms ease;
     }
 
-    .stat strong,
-    .step strong {
+    .stat strong {
       display: block;
       margin-top: 0.4rem;
       font-family: "Space Grotesk", sans-serif;
@@ -274,7 +270,6 @@
     }
 
     .stat p,
-    .step p,
     .intro p {
       margin: 0.6rem 0 0;
       color: var(--muted);
@@ -338,7 +333,6 @@
       font-weight: 700;
     }
 
-    .step span,
     .stat span {
       font-size: 0.82rem;
       text-transform: uppercase;
@@ -347,15 +341,87 @@
       font-weight: 700;
     }
 
-    .step code {
-      display: inline-block;
-      margin-top: 0.75rem;
-      padding: 0.5rem 0.75rem;
-      border-radius: 0.9rem;
-      background: rgba(25, 21, 18, 0.06);
-      color: var(--ink);
-      font-family: "IBM Plex Sans", sans-serif;
-      font-size: 0.95rem;
+    .repo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .feed {
+      padding: 1.4rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255, 251, 245, 0.86);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      transition: transform 160ms ease;
+    }
+
+    .feed-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .feed-kicker,
+    .feed-meta,
+    .feed-empty {
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-deep);
+      font-weight: 700;
+    }
+
+    .feed-top p,
+    .feed-list p,
+    .feed-item p {
+      margin: 0.5rem 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .feed-list {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .feed-item {
+      padding-top: 0.9rem;
+      border-top: 1px solid rgba(25, 21, 18, 0.08);
+    }
+
+    .feed-item:first-child {
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .feed-item a,
+    .feed-link {
+      text-decoration: none;
+    }
+
+    .feed-item strong,
+    .feed-link strong {
+      display: block;
+      margin-top: 0.2rem;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .feed-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 1rem;
+      color: var(--accent-deep);
+      font-weight: 600;
+    }
+
+    .feed-loading {
+      color: var(--muted);
     }
 
     @keyframes rise {
@@ -373,7 +439,7 @@
     .hero-copy,
     .stat,
     .intro,
-    .step {
+    .feed {
       animation: rise 600ms ease both;
     }
 
@@ -389,6 +455,10 @@
 
       .grid-4 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .repo-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -409,7 +479,7 @@
       }
 
       .grid-4,
-      .step-grid {
+      .repo-grid {
         grid-template-columns: 1fr;
       }
 
@@ -434,7 +504,7 @@
         <span>Duff Linux</span>
       </a>
       <nav class="nav" aria-label="Primary">
-        <a href="#build">Build</a>
+        <a href="#repo">Repo</a>
         <a href="https://github.com/duffnshmrt/duff-linux/wiki">Wiki</a>
         <a href="https://github.com/duffnshmrt/duff-linux/issues">Issues</a>
       </nav>
@@ -518,45 +588,264 @@
         </article>
       </section>
 
-      <section class="section" id="build">
+      <section class="section" id="repo">
         <div class="section-head">
           <div>
-            <h2>Build Your Own ISO</h2>
+            <h2>From the Repo</h2>
             <p>
-              The website does not replace the wiki, but it should make the repo feel approachable. If you want to rebuild
-              Duff Linux yourself, the repository already exposes the key entry points.
+              This section pulls straight from GitHub so the site tracks the real project: releases, open issues,
+              the wiki home page, and the ISO Generation Guide.
             </p>
           </div>
         </div>
-        <div class="step-grid">
-          <article class="step">
-            <span>Step 1</span>
-            <strong>Prepare the build environment</strong>
-            <p>Start with the setup helper so the host machine has the expected dependencies for ISO generation.</p>
-            <code>scripts/setup-iso-build-env.sh</code>
+        <div class="repo-grid">
+          <article class="feed">
+            <div class="feed-top">
+              <div>
+                <span class="feed-kicker">Releases</span>
+                <h3>Release Blog</h3>
+                <p>Latest published releases, turned into a lightweight changelog feed.</p>
+              </div>
+            </div>
+            <div class="feed-list" id="release-feed">
+              <p class="feed-loading">Loading releases from GitHub...</p>
+            </div>
+            <a class="feed-link" href="https://github.com/duffnshmrt/duff-linux/releases">View all releases</a>
           </article>
-          <article class="step">
-            <span>Step 2</span>
-            <strong>Use the helper build scripts</strong>
-            <p>Predefined scripts exist for common image variants, including AMD and NVIDIA oriented builds.</p>
-            <code>scripts/build-iso.sh</code>
+
+          <article class="feed">
+            <div class="feed-top">
+              <div>
+                <span class="feed-kicker">Issues</span>
+                <h3>Current Issues</h3>
+                <p>Open issues from the repository, with a clean empty state when everything is quiet.</p>
+              </div>
+            </div>
+            <div class="feed-list" id="issue-feed">
+              <p class="feed-loading">Loading open issues from GitHub...</p>
+            </div>
+            <a class="feed-link" href="https://github.com/duffnshmrt/duff-linux/issues">Open the issue tracker</a>
           </article>
-          <article class="step">
-            <span>Step 3</span>
-            <strong>Dive into the build logic</strong>
-            <p>The main `duff` build script and `build/` tree show how the live image, installer, and defaults are assembled.</p>
-            <code>duff</code>
+
+          <article class="feed">
+            <div class="feed-top">
+              <div>
+                <span class="feed-kicker">Wiki</span>
+                <h3>Wiki Home</h3>
+                <p>A live preview of the project wiki homepage, pulled from the GitHub wiki itself.</p>
+              </div>
+            </div>
+            <div class="feed-list" id="wiki-feed">
+              <p class="feed-loading">Loading wiki home from GitHub...</p>
+            </div>
+            <a class="feed-link" href="https://github.com/duffnshmrt/duff-linux/wiki">Open the wiki</a>
           </article>
-          <a class="step" href="https://github.com/duffnshmrt/duff-linux/wiki">
-            <span>Step 4</span>
-            <strong>Follow the full guide</strong>
-            <p>The project wiki is the place for the complete ISO generation workflow and supporting documentation.</p>
-            <code>Open the wiki</code>
-          </a>
+
+          <article class="feed">
+            <div class="feed-top">
+              <div>
+                <span class="feed-kicker">Guide</span>
+                <h3>ISO Generation Guide</h3>
+                <p>The build guide can live here as a live project preview instead of static homepage copy.</p>
+              </div>
+            </div>
+            <div class="feed-list" id="guide-feed">
+              <p class="feed-loading">Loading the ISO Generation Guide from GitHub...</p>
+            </div>
+            <a class="feed-link" href="https://github.com/duffnshmrt/duff-linux/wiki/ISO-Generation-Guide">Open the full guide</a>
+          </article>
         </div>
       </section>
     </main>
 
   </div>
+  <script>
+    const repoBase = "https://github.com/duffnshmrt/duff-linux";
+    const apiBase = "https://api.github.com/repos/duffnshmrt/duff-linux";
+    const wikiBase = "https://raw.githubusercontent.com/wiki/duffnshmrt/duff-linux";
+
+    function escapeHtml(value) {
+      return value
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function formatDate(value) {
+      const date = new Date(value);
+      return new Intl.DateTimeFormat("en", {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      }).format(date);
+    }
+
+    function plainTextFromMarkdown(markdown) {
+      return markdown
+        .replace(/```[\s\S]*?```/g, " ")
+        .replace(/^#{1,6}\s*/gm, "")
+        .replace(/^>\s?/gm, "")
+        .replace(/!\[[^\]]*\]\([^)]+\)/g, "")
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+        .replace(/`([^`]+)`/g, "$1")
+        .replace(/^\s*[-*+]\s+/gm, "")
+        .replace(/\r/g, "")
+        .replace(/\n+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function markdownBullets(markdown, limit) {
+      return markdown
+        .split(/\r?\n/)
+        .filter((line) => /^\s*-\s+/.test(line))
+        .map((line) => line.replace(/^\s*-\s+/, "").replace(/`([^`]+)`/g, "$1").trim())
+        .filter(Boolean)
+        .slice(0, limit);
+    }
+
+    function shortText(value, limit) {
+      if (value.length <= limit) {
+        return value;
+      }
+
+      return `${value.slice(0, limit).trimEnd()}...`;
+    }
+
+    function setFeedHtml(id, html) {
+      const node = document.getElementById(id);
+      if (node) {
+        node.innerHTML = html;
+      }
+    }
+
+    async function fetchJson(url) {
+      const response = await fetch(url, {
+        headers: {
+          Accept: "application/vnd.github+json"
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Request failed: ${response.status}`);
+      }
+
+      return response.json();
+    }
+
+    async function fetchText(url) {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Request failed: ${response.status}`);
+      }
+      return response.text();
+    }
+
+    async function loadReleases() {
+      try {
+        const releases = await fetchJson(`${apiBase}/releases?per_page=3`);
+        if (!releases.length) {
+          setFeedHtml("release-feed", `<p class="feed-empty">No releases published yet.</p>`);
+          return;
+        }
+
+        const html = releases.map((release) => {
+          const summary = shortText(plainTextFromMarkdown(release.body || "Release notes available on GitHub."), 180);
+          return `
+            <article class="feed-item">
+              <span class="feed-meta">${escapeHtml(formatDate(release.published_at || release.created_at))}</span>
+              <a href="${release.html_url}">
+                <strong>${escapeHtml(release.name || release.tag_name)}</strong>
+              </a>
+              <p>${escapeHtml(summary)}</p>
+            </article>
+          `;
+        }).join("");
+
+        setFeedHtml("release-feed", html);
+      } catch (error) {
+        setFeedHtml("release-feed", `<p class="feed-empty">GitHub releases could not be loaded right now.</p>`);
+      }
+    }
+
+    async function loadIssues() {
+      try {
+        const issues = await fetchJson(`${apiBase}/issues?state=open&per_page=4`);
+        const realIssues = issues.filter((item) => !item.pull_request);
+
+        if (!realIssues.length) {
+          setFeedHtml(
+            "issue-feed",
+            `<p class="feed-empty">No open issues right now. That is a pretty good look.</p>`
+          );
+          return;
+        }
+
+        const html = realIssues.map((issue) => `
+          <article class="feed-item">
+            <span class="feed-meta">Issue #${issue.number}</span>
+            <a href="${issue.html_url}">
+              <strong>${escapeHtml(issue.title)}</strong>
+            </a>
+            <p>Opened ${escapeHtml(formatDate(issue.created_at))}</p>
+          </article>
+        `).join("");
+
+        setFeedHtml("issue-feed", html);
+      } catch (error) {
+        setFeedHtml("issue-feed", `<p class="feed-empty">Open issues could not be loaded right now.</p>`);
+      }
+    }
+
+    async function loadWikiHome() {
+      try {
+        const markdown = await fetchText(`${wikiBase}/Home.md`);
+        const summary = shortText(plainTextFromMarkdown(markdown), 260);
+        const bullets = markdownBullets(markdown, 3);
+
+        const bulletHtml = bullets.length
+          ? bullets.map((item) => `<article class="feed-item"><strong>${escapeHtml(item)}</strong></article>`).join("")
+          : "";
+
+        setFeedHtml(
+          "wiki-feed",
+          `
+            <p>${escapeHtml(summary)}</p>
+            ${bulletHtml}
+          `
+        );
+      } catch (error) {
+        setFeedHtml("wiki-feed", `<p class="feed-empty">The wiki preview could not be loaded right now.</p>`);
+      }
+    }
+
+    async function loadGuide() {
+      try {
+        const markdown = await fetchText(`${wikiBase}/ISO-Generation-Guide.md`);
+        const summary = shortText(plainTextFromMarkdown(markdown), 220);
+        const bullets = markdownBullets(markdown, 4);
+
+        const html = `
+          <p>${escapeHtml(summary)}</p>
+          ${bullets.map((item) => `
+            <article class="feed-item">
+              <strong>${escapeHtml(item)}</strong>
+            </article>
+          `).join("")}
+        `;
+
+        setFeedHtml("guide-feed", html);
+      } catch (error) {
+        setFeedHtml("guide-feed", `<p class="feed-empty">The ISO guide preview could not be loaded right now.</p>`);
+      }
+    }
+
+    loadReleases();
+    loadIssues();
+    loadWikiHome();
+    loadGuide();
+  </script>
 </body>
 </html>
