@@ -97,7 +97,13 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      padding: 1rem 0 1.5rem;
+      padding: 0.9rem 1rem;
+      margin: 0.25rem 0 1.5rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: rgba(255, 251, 245, 0.72);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
     }
 
     .brand {
@@ -217,9 +223,12 @@
     .lead {
       margin: 0;
       max-width: 40rem;
-      color: var(--muted);
-      font-size: 1.08rem;
-      line-height: 1.65;
+      color: var(--ink);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.35rem, 3vw, 2.1rem);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      line-height: 1.16;
     }
 
     .hero-actions {
@@ -333,6 +342,10 @@
       box-shadow: var(--shadow);
       backdrop-filter: blur(16px);
       transition: transform 160ms ease;
+    }
+
+    .feed h3 {
+      margin-bottom: 0.85rem;
     }
 
     .feed-meta,
@@ -528,7 +541,7 @@
         <span class="brand-mark">
           <img src="assets/icon.png" alt="Duff Linux logo">
         </span>
-        <span>DUFF LINUX</span>
+        <span>Duff Linux</span>
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="https://github.com/duffnshmrt/duff-linux">
@@ -680,6 +693,30 @@
       }).format(date);
     }
 
+    function relativeTime(value) {
+      const date = new Date(value);
+      const seconds = Math.round((date.getTime() - Date.now()) / 1000);
+      const units = [
+        ["year", 31536000],
+        ["month", 2592000],
+        ["week", 604800],
+        ["day", 86400],
+        ["hour", 3600],
+        ["minute", 60]
+      ];
+
+      for (const [unit, unitSeconds] of units) {
+        if (Math.abs(seconds) >= unitSeconds) {
+          return new Intl.RelativeTimeFormat("en", { numeric: "auto" }).format(
+            Math.round(seconds / unitSeconds),
+            unit
+          );
+        }
+      }
+
+      return "just now";
+    }
+
     function plainTextFromMarkdown(markdown) {
       return markdown
         .replace(/```[\s\S]*?```/g, " ")
@@ -812,9 +849,10 @@
 
         const html = releases.map((release) => {
           const summary = shortText(plainTextFromMarkdown(release.body || "Release notes available on GitHub."), 180);
+          const publishedAt = release.published_at || release.created_at;
           return `
             <article class="feed-item">
-              <span class="feed-meta">${escapeHtml(formatDate(release.published_at || release.created_at))}</span>
+              <span class="feed-meta">${escapeHtml(relativeTime(publishedAt))} · ${escapeHtml(formatDate(publishedAt))}</span>
               <a href="${release.html_url}">
                 <strong>${escapeHtml(release.name || release.tag_name)}</strong>
               </a>
@@ -848,7 +886,7 @@
             <a href="${issue.html_url}">
               <strong>${escapeHtml(issue.title)}</strong>
             </a>
-            <p>Opened ${escapeHtml(formatDate(issue.created_at))}</p>
+            <p>Opened ${escapeHtml(relativeTime(issue.created_at))} · ${escapeHtml(formatDate(issue.created_at))}</p>
           </article>
         `).join("");
 
