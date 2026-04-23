@@ -33,6 +33,7 @@
       --accent-soft: rgba(225, 138, 73, 0.16);
       --fizz: rgba(255, 255, 255, 0.86);
       --foam-line: #fffaf0;
+      --flathub-logo: #ffffff;
       --green: #67b798;
       --shadow: 0 20px 70px rgba(0, 0, 0, 0.28);
       --radius-xl: 32px;
@@ -59,6 +60,7 @@
       --accent-soft: rgba(201, 107, 44, 0.14);
       --fizz: rgba(140, 66, 20, 0.72);
       --foam-line: #d98238;
+      --flathub-logo: #4a90d9;
       --green: #2b6b57;
       --shadow: 0 20px 70px rgba(70, 37, 15, 0.15);
     }
@@ -159,35 +161,7 @@
     }
 
     .brand-text span {
-      position: relative;
       display: inline-block;
-      padding-bottom: 0.48rem;
-    }
-
-    .brand-text span::before,
-    .brand-text span::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 0.44rem;
-      pointer-events: none;
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='32' height='10' viewBox='0 0 32 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 5 C4 1 12 1 16 5 S28 9 32 5' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-      mask-image: url("data:image/svg+xml,%3Csvg width='32' height='10' viewBox='0 0 32 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 5 C4 1 12 1 16 5 S28 9 32 5' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-      -webkit-mask-repeat: repeat-x;
-      mask-repeat: repeat-x;
-      -webkit-mask-size: 1.6rem 0.44rem;
-      mask-size: 1.6rem 0.44rem;
-    }
-
-    .brand-text span::before {
-      bottom: 0.18rem;
-      background: var(--foam-line);
-    }
-
-    .brand-text span::after {
-      bottom: -0.05rem;
-      background: var(--accent);
     }
 
     .brand-mark {
@@ -594,6 +568,10 @@
 
     .stat-logo.rounded {
       border-radius: 0.45rem;
+    }
+
+    .flathub-logo {
+      color: var(--flathub-logo);
     }
 
     .stat-emoji {
@@ -1197,33 +1175,42 @@
             <article class="stat">
               <span>Desktop</span>
               <strong class="stat-title">
-                <img class="stat-logo rounded" src="https://kde.org/stuff/clipart/logo/kde-logo-white-blue-rounded-128x128.png" alt="KDE Plasma logo">
                 KDE Plasma
+                <img class="stat-logo rounded" src="https://kde.org/stuff/clipart/logo/kde-logo-white-blue-rounded-128x128.png" alt="KDE Plasma logo">
               </strong>
               <p>Latest available Plasma stack with a lightly-themed, ready-to-use desktop feel.</p>
             </article>
             <article class="stat">
               <span>Filesystem</span>
               <strong class="stat-title">
-                <span class="stat-emoji" aria-hidden="true">📁</span>
                 BTRFS + Snapshots
+                <span class="stat-emoji" aria-hidden="true">📁</span>
               </strong>
               <p>Automatic pre-transaction snapshots and regular backup-friendly behavior out of the box.</p>
             </article>
             <article class="stat">
               <span>Installer</span>
               <strong class="stat-title">
-                <img class="stat-logo" src="https://raw.githubusercontent.com/calamares/calamares/calamares/src/branding/default/squid.png" alt="Calamares logo">
                 Calamares Live ISO
+                <img class="stat-logo" src="https://raw.githubusercontent.com/calamares/calamares/calamares/src/branding/default/squid.png" alt="Calamares logo">
               </strong>
               <p>Boot a live environment, install graphically, and land in a usable system quickly.</p>
             </article>
             <article class="stat">
               <span>Packages</span>
               <strong class="stat-title">
-                <img class="stat-logo" src="https://raw.githubusercontent.com/aarnt/octoxbps/master/resources/images/octopi.png" alt="OctoXBPS logo">
-                <img class="stat-logo" src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Flatpak_Logo.svg" alt="Flatpak logo">
                 OctoXBPS + Flatpak
+                <img class="stat-logo" src="https://raw.githubusercontent.com/aarnt/octoxbps/master/resources/images/octopi.png" alt="OctoXBPS logo">
+                <svg class="stat-logo flathub-logo" viewBox="0.04 -1.13 62.99 60.24" role="img" aria-label="Flathub logo">
+                  <g transform="matrix(0.89089,0,0,0.89089,-2448.3,-532.77)" fill="currentColor">
+                    <g transform="matrix(1.7622,0,0,1.7622,2470.4,445.42)">
+                      <circle cx="166.69" cy="95.647003" r="9.0478001"/>
+                      <rect x="158.75" y="108.33" width="15.875" height="15.875" rx="4.2333002" ry="4.2333002"/>
+                      <path transform="matrix(0.91132,0.52615,0.52615,-0.91132,101.23,110.53)" d="m 69.514,58.833 h -1.7806 -10.247 a 2.4441,2.4441 60 0 1 -2.1167,-3.6662 l 6.0139,-10.416 a 2.4441,2.4441 2.522e-7 0 1 4.2333,0 l 6.0139,10.416 a 2.4441,2.4441 120 0 1 -2.1167,3.6662 z"/>
+                      <path transform="rotate(90)" d="m 116.31,-194.99 c 0.87946,0 1.5875,0.70801 1.5875,1.5875 v 12.7 c 0,0.87946 -0.70802,1.5875 -1.5875,1.5875 -0.87948,0 -1.5875,-0.70802 -1.5875,-1.5875 v -12.7 c 0,-0.87946 0.70801,-1.5875 1.5875,-1.5875 z m -7.9375,7.9375 c 0,-0.87946 0.70802,-1.5875 1.5875,-1.5875 h 12.7 c 0.87946,0 1.5875,0.70802 1.5875,1.5875 0,0.87947 -0.70802,1.5875 -1.5875,1.5875 h -12.7 c -0.87947,0 -1.5875,-0.70802 -1.5875,-1.5875 z"/>
+                    </g>
+                  </g>
+                </svg>
               </strong>
               <p>OctoXBPS for native packages, update notifications, and Discover-backed Flatpak support.</p>
             </article>
