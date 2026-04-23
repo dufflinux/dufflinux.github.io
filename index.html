@@ -343,13 +343,16 @@
     .hero-copy {
       padding: 5rem 2.2rem 2.2rem;
       border-radius: var(--radius-xl);
-      border-color: rgba(255, 235, 185, 0.28);
+      border: 1px solid rgba(255, 250, 235, 0.48);
       background:
-        linear-gradient(180deg, rgba(255, 249, 235, 0.72) 0 4.45rem, transparent 4.45rem),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.26), transparent 16%, transparent 82%, rgba(255, 255, 255, 0.16)),
+        linear-gradient(180deg, rgba(255, 249, 235, 0.7) 0 4.45rem, transparent 4.45rem),
         radial-gradient(circle at 82% 22%, rgba(255, 240, 171, 0.46), transparent 28%),
         linear-gradient(145deg, rgba(246, 182, 83, 0.92), rgba(171, 87, 21, 0.86));
       box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.62),
+        inset 1.2rem 0 2.8rem rgba(255, 255, 255, 0.1),
+        inset -1.2rem 0 2.8rem rgba(255, 255, 255, 0.08),
         inset 0 -28px 55px rgba(108, 48, 8, 0.2),
         var(--shadow);
       overflow: visible;
@@ -358,7 +361,16 @@
     }
 
     .hero-copy::before {
-      content: none;
+      content: "";
+      position: absolute;
+      inset: 0.45rem;
+      border-radius: calc(var(--radius-xl) - 8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.24), transparent 8% 92%, rgba(255, 255, 255, 0.16)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 36%);
+      pointer-events: none;
+      z-index: 2;
     }
 
     .hero-copy::after {
@@ -369,22 +381,36 @@
       right: 1.15rem;
       height: 3.72rem;
       border-radius: 999px;
-      background:
-        radial-gradient(circle at 7% 1.34rem, #fffdf7 0 1.26rem, transparent 1.34rem),
-        radial-gradient(circle at 19% 0.98rem, #fff6df 0 1.48rem, transparent 1.58rem),
-        radial-gradient(circle at 33% 1.42rem, #fffdf7 0 1.16rem, transparent 1.24rem),
-        radial-gradient(circle at 48% 1.02rem, #fff2d7 0 1.38rem, transparent 1.47rem),
-        radial-gradient(circle at 62% 1.36rem, #fffdf7 0 1.18rem, transparent 1.27rem),
-        radial-gradient(circle at 76% 0.98rem, #fff7e4 0 1.5rem, transparent 1.6rem),
-        radial-gradient(circle at 92% 1.34rem, #fffdf7 0 1.22rem, transparent 1.3rem);
-      box-shadow: 0 14px 24px rgba(111, 52, 8, 0.14);
+      background: linear-gradient(180deg, #fff8e6, #f8ddb3);
+      box-shadow: 0 14px 24px rgba(111, 52, 8, 0.12);
       pointer-events: none;
-      z-index: 3;
+      z-index: 1;
     }
 
-    .hero-copy > :not(.mug-handle) {
+    .hero-copy > :not(.mug-handle):not(.mug-foam) {
       position: relative;
+      z-index: 5;
+    }
+
+    .mug-foam {
+      position: absolute;
+      inset: 0.48rem 1.2rem auto;
+      height: 3.82rem;
+      pointer-events: none;
       z-index: 4;
+    }
+
+    .mug-foam span {
+      position: absolute;
+      display: block;
+      width: var(--size);
+      height: var(--size);
+      left: var(--x);
+      top: var(--y);
+      border-radius: 999px;
+      background: var(--tone, #fffdf7);
+      box-shadow: inset 0 -0.18rem 0.45rem rgba(221, 166, 88, 0.16), 0 0.45rem 0.9rem rgba(111, 52, 8, 0.1);
+      transform: translateX(-50%);
     }
 
     .mug-handle {
@@ -394,11 +420,12 @@
       width: 2.7rem;
       height: 6.8rem;
       transform: translateY(-50%);
-      border: 0.52rem solid color-mix(in srgb, var(--accent-deep), var(--paper-solid) 34%);
+      border: 0.52rem solid rgba(255, 250, 235, 0.38);
       border-right: 0;
       border-radius: 2rem 0 0 2rem;
-      box-shadow: inset 0 0 0 1px var(--line), 0 12px 28px rgba(0, 0, 0, 0.12);
-      opacity: 0.78;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0.45rem 0 0 rgba(255, 255, 255, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.12), 0 12px 28px rgba(0, 0, 0, 0.12);
+      opacity: 0.92;
       pointer-events: none;
       z-index: 0;
     }
@@ -437,17 +464,22 @@
 
     .foam-divider-bubbles {
       position: absolute;
-      inset: 0.42rem 0 0;
-      height: 0.9rem;
+      inset: 0.1rem 0 0;
+      height: 1.3rem;
       pointer-events: none;
       background:
-        radial-gradient(circle at 8% 0.34rem, var(--foam-line) 0 0.26rem, transparent 0.29rem),
-        radial-gradient(circle at 21% 0.05rem, var(--foam-line) 0 0.18rem, transparent 0.21rem),
-        radial-gradient(circle at 36% 0.3rem, var(--foam-line) 0 0.22rem, transparent 0.25rem),
-        radial-gradient(circle at 54% 0.08rem, var(--foam-line) 0 0.18rem, transparent 0.21rem),
-        radial-gradient(circle at 71% 0.34rem, var(--foam-line) 0 0.24rem, transparent 0.27rem),
-        radial-gradient(circle at 92% 0.06rem, var(--foam-line) 0 0.2rem, transparent 0.23rem);
-      opacity: 0.72;
+        radial-gradient(circle at 4% 0.72rem, var(--foam-line) 0 0.2rem, transparent 0.23rem),
+        radial-gradient(circle at 11% 0.24rem, var(--foam-line) 0 0.3rem, transparent 0.33rem),
+        radial-gradient(circle at 19% 0.78rem, var(--foam-line) 0 0.18rem, transparent 0.21rem),
+        radial-gradient(circle at 27% 0.34rem, var(--foam-line) 0 0.24rem, transparent 0.27rem),
+        radial-gradient(circle at 36% 0.82rem, var(--foam-line) 0 0.22rem, transparent 0.25rem),
+        radial-gradient(circle at 45% 0.22rem, var(--foam-line) 0 0.18rem, transparent 0.21rem),
+        radial-gradient(circle at 54% 0.74rem, var(--foam-line) 0 0.28rem, transparent 0.31rem),
+        radial-gradient(circle at 63% 0.3rem, var(--foam-line) 0 0.2rem, transparent 0.23rem),
+        radial-gradient(circle at 72% 0.82rem, var(--foam-line) 0 0.24rem, transparent 0.27rem),
+        radial-gradient(circle at 82% 0.28rem, var(--foam-line) 0 0.18rem, transparent 0.21rem),
+        radial-gradient(circle at 92% 0.7rem, var(--foam-line) 0 0.26rem, transparent 0.29rem);
+      opacity: 0.74;
     }
 
     .foam-divider::after {
@@ -1078,6 +1110,15 @@
           <section class="hero">
             <article class="panel hero-copy">
               <span class="mug-handle" aria-hidden="true"></span>
+              <span class="mug-foam" aria-hidden="true">
+                <span style="--x: 7%; --y: 1.08rem; --size: 2.55rem;"></span>
+                <span style="--x: 18%; --y: 0.42rem; --size: 3.05rem; --tone: #fff7e4;"></span>
+                <span style="--x: 31%; --y: 1.18rem; --size: 2.35rem;"></span>
+                <span style="--x: 45%; --y: 0.55rem; --size: 2.8rem; --tone: #fff2d7;"></span>
+                <span style="--x: 59%; --y: 1.1rem; --size: 2.45rem;"></span>
+                <span style="--x: 73%; --y: 0.42rem; --size: 3.08rem; --tone: #fff7e4;"></span>
+                <span style="--x: 90%; --y: 1.12rem; --size: 2.5rem;"></span>
+              </span>
               <p class="lead">
                 An opinionated distro based off dani-77's d77void Linux distribution, focused on KDE Plasma with BTRFS.🍺
               </p>
