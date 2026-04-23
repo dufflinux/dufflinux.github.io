@@ -341,7 +341,7 @@
       width: auto;
       height: 2.8rem;
       opacity: 1;
-      border-radius: 0;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
       background: #fff3d3;
       box-shadow: 0 8px 14px rgba(111, 52, 8, 0.1);
       pointer-events: none;
@@ -543,6 +543,7 @@
       padding: 1.35rem;
       border-radius: var(--radius-lg);
       transition: transform 160ms ease;
+      position: relative;
     }
 
     .stat strong {
@@ -554,9 +555,17 @@
     }
 
     .stat-title {
-      display: flex;
+      padding-right: 4.2rem;
+    }
+
+    .stat-icons {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: flex-end;
+      gap: 0.4rem;
     }
 
     .stat-logo {
@@ -575,7 +584,7 @@
     }
 
     .stat-emoji {
-      font-size: 1.45rem;
+      font-size: 1.8rem;
       line-height: 1;
     }
 
@@ -601,7 +610,9 @@
       line-height: 1.6;
     }
 
-    .stat span {
+    .stat-kicker {
+      display: inline-block;
+      padding-right: 4.2rem;
       font-size: 0.82rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -1173,33 +1184,38 @@
 
           <section class="grid-4">
             <article class="stat">
-              <span>Desktop</span>
+              <span class="stat-kicker">Desktop</span>
+              <div class="stat-icons">
+                <img class="stat-logo rounded" src="https://kde.org/stuff/clipart/logo/kde-logo-white-blue-rounded-128x128.png" alt="KDE Plasma logo">
+              </div>
               <strong class="stat-title">
                 KDE Plasma
-                <img class="stat-logo rounded" src="https://kde.org/stuff/clipart/logo/kde-logo-white-blue-rounded-128x128.png" alt="KDE Plasma logo">
               </strong>
               <p>Latest available Plasma stack with a lightly-themed, ready-to-use desktop feel.</p>
             </article>
             <article class="stat">
-              <span>Filesystem</span>
+              <span class="stat-kicker">Filesystem</span>
+              <div class="stat-icons">
+                <span class="stat-emoji" aria-hidden="true">📁</span>
+              </div>
               <strong class="stat-title">
                 BTRFS + Snapshots
-                <span class="stat-emoji" aria-hidden="true">📁</span>
               </strong>
               <p>Automatic pre-transaction snapshots and regular backup-friendly behavior out of the box.</p>
             </article>
             <article class="stat">
-              <span>Installer</span>
+              <span class="stat-kicker">Installer</span>
+              <div class="stat-icons">
+                <img class="stat-logo" src="https://raw.githubusercontent.com/calamares/calamares/calamares/src/branding/default/squid.png" alt="Calamares logo">
+              </div>
               <strong class="stat-title">
                 Calamares Live ISO
-                <img class="stat-logo" src="https://raw.githubusercontent.com/calamares/calamares/calamares/src/branding/default/squid.png" alt="Calamares logo">
               </strong>
               <p>Boot a live environment, install graphically, and land in a usable system quickly.</p>
             </article>
             <article class="stat">
-              <span>Packages</span>
-              <strong class="stat-title">
-                OctoXBPS + Flatpak
+              <span class="stat-kicker">Packages</span>
+              <div class="stat-icons">
                 <img class="stat-logo" src="https://raw.githubusercontent.com/aarnt/octoxbps/master/resources/images/octopi.png" alt="OctoXBPS logo">
                 <svg class="stat-logo flathub-logo" viewBox="0.04 -1.13 62.99 60.24" role="img" aria-label="Flathub logo">
                   <g transform="matrix(0.89089,0,0,0.89089,-2448.3,-532.77)" fill="currentColor">
@@ -1211,6 +1227,9 @@
                     </g>
                   </g>
                 </svg>
+              </div>
+              <strong class="stat-title">
+                OctoXBPS + Flatpak
               </strong>
               <p>OctoXBPS for native packages, update notifications, and Discover-backed Flatpak support.</p>
             </article>
