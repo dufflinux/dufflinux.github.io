@@ -727,6 +727,44 @@
       font-size: 0.94rem;
     }
 
+    .release-body {
+      margin-top: 0.65rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .release-body p,
+    .release-body ul {
+      margin: 0.55rem 0 0;
+    }
+
+    .release-body ul {
+      padding-left: 1.2rem;
+    }
+
+    .release-body li + li {
+      margin-top: 0.35rem;
+    }
+
+    .release-body a,
+    .release-more {
+      color: var(--accent-deep);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .release-body hr {
+      height: 1px;
+      margin: 0.8rem 0 0;
+      border: 0;
+      background: var(--line);
+    }
+
+    .release-more {
+      display: inline-flex;
+      margin-top: 0.75rem;
+    }
+
     .feed-link {
       display: inline-flex;
       align-items: center;
@@ -1123,13 +1161,17 @@
             <article class="panel hero-copy">
               <span class="mug-handle" aria-hidden="true"></span>
               <span class="mug-foam" aria-hidden="true">
-                <span style="--x: 7%; --y: 0.62rem; --size: 1.85rem;"></span>
-                <span style="--x: 18%; --y: 0.04rem; --size: 2.25rem; --tone: #fff7e4;"></span>
-                <span style="--x: 31%; --y: 0.72rem; --size: 1.75rem;"></span>
-                <span style="--x: 45%; --y: 0.12rem; --size: 2.05rem; --tone: #fff2d7;"></span>
-                <span style="--x: 59%; --y: 0.66rem; --size: 1.82rem;"></span>
-                <span style="--x: 73%; --y: 0.04rem; --size: 2.28rem; --tone: #fff7e4;"></span>
-                <span style="--x: 90%; --y: 0.64rem; --size: 1.85rem;"></span>
+                <span style="--x: 5%; --y: 0.68rem; --size: 1.55rem;"></span>
+                <span style="--x: 13%; --y: 0.14rem; --size: 1.95rem; --tone: #fff7e4;"></span>
+                <span style="--x: 22%; --y: 0.72rem; --size: 1.45rem;"></span>
+                <span style="--x: 31%; --y: 0.18rem; --size: 1.75rem; --tone: #fff2d7;"></span>
+                <span style="--x: 40%; --y: 0.68rem; --size: 1.5rem;"></span>
+                <span style="--x: 50%; --y: 0.08rem; --size: 1.9rem; --tone: #fff7e4;"></span>
+                <span style="--x: 60%; --y: 0.7rem; --size: 1.48rem;"></span>
+                <span style="--x: 69%; --y: 0.16rem; --size: 1.8rem; --tone: #fff2d7;"></span>
+                <span style="--x: 78%; --y: 0.68rem; --size: 1.5rem;"></span>
+                <span style="--x: 87%; --y: 0.08rem; --size: 1.95rem; --tone: #fff7e4;"></span>
+                <span style="--x: 96%; --y: 0.68rem; --size: 1.45rem;"></span>
               </span>
               <p class="lead">
                 An opinionated distro based off dani-77's d77void Linux distribution, focused on KDE Plasma with BTRFS.🍺
@@ -1381,22 +1423,72 @@
       return "just now";
     }
 
-    function plainTextFromMarkdown(markdown) {
-      return markdown
-        .replace(/```[\s\S]*?```/g, " ")
-        .replace(/\r/g, "")
-        .replace(/^#{1,6}\s*/gm, "")
-        .replace(/^>\s?/gm, "")
-        .replace(/!\[[^\]]*\]\([^)]+\)/g, "")
-        .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-        .replace(/`([^`]+)`/g, "$1")
-        .replace(/^\s*[-*+]\s+/gm, " ")
-        .replace(/\n{2,}/g, ". ")
-        .replace(/\n/g, " ")
-        .replace(/\s+\./g, ".")
-        .replace(/\.{2,}/g, ".")
-        .replace(/\s+/g, " ")
-        .trim();
+    function renderInlineMarkdown(value) {
+      return escapeHtml(value)
+        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+        .replace(/\[([^\]]*)\]\(([^)]+)\)/g, (_match, label, url) => {
+          const text = label || url;
+          return `<a href="${url}">${text}</a>`;
+        })
+        .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+        .replace(/`([^`]+)`/g, "<code>$1</code>");
+    }
+
+    function renderReleaseMarkdown(markdown) {
+      const lines = markdown.replace(/\r/g, "").split("\n");
+      let html = "";
+      let paragraph = [];
+      let listItems = [];
+
+      function flushParagraph() {
+        if (!paragraph.length) {
+          return;
+        }
+
+        html += `<p>${paragraph.map(renderInlineMarkdown).join("<br>")}</p>`;
+        paragraph = [];
+      }
+
+      function flushList() {
+        if (!listItems.length) {
+          return;
+        }
+
+        html += `<ul>${listItems.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join("")}</ul>`;
+        listItems = [];
+      }
+
+      for (const rawLine of lines) {
+        const line = rawLine.trim();
+
+        if (!line) {
+          flushParagraph();
+          flushList();
+          continue;
+        }
+
+        if (/^---+$/.test(line)) {
+          flushParagraph();
+          flushList();
+          html += "<hr>";
+          continue;
+        }
+
+        const listMatch = line.match(/^[-*+]\s+(.+)$/);
+        if (listMatch) {
+          flushParagraph();
+          listItems.push(listMatch[1]);
+          continue;
+        }
+
+        flushList();
+        paragraph.push(line.replace(/^#{1,6}\s*/, ""));
+      }
+
+      flushParagraph();
+      flushList();
+
+      return html || "<p>Release notes available on GitHub.</p>";
     }
 
     function renderWikiMarkdown(markdown) {
@@ -1469,14 +1561,6 @@
       return html || `<p class="feed-empty">The wiki preview is empty right now.</p>`;
     }
 
-    function shortText(value, limit) {
-      if (value.length <= limit) {
-        return value;
-      }
-
-      return `${value.slice(0, limit).trimEnd()}...`;
-    }
-
     function setFeedHtml(id, html) {
       const node = document.getElementById(id);
       if (node) {
@@ -1515,7 +1599,6 @@
         }
 
         const html = releases.map((release) => {
-          const summary = shortText(plainTextFromMarkdown(release.body || "Release notes available on GitHub."), 340);
           const publishedAt = release.published_at || release.created_at;
           return `
             <article class="feed-item">
@@ -1523,7 +1606,8 @@
               <a href="${release.html_url}">
                 <strong>${escapeHtml(release.name || release.tag_name)}</strong>
               </a>
-              <p>${escapeHtml(summary)}</p>
+              <div class="release-body">${renderReleaseMarkdown(release.body || "Release notes available on GitHub.")}</div>
+              <a class="release-more" href="${release.html_url}">Read more</a>
             </article>
           `;
         }).join("");
