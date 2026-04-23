@@ -308,8 +308,7 @@
     .top-left {
       display: grid;
       gap: 1.5rem;
-      grid-template-rows: auto 1fr;
-      align-content: stretch;
+      align-content: start;
     }
 
     .panel,
@@ -577,7 +576,7 @@
 
     .top-left .grid-4 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      align-self: stretch;
+      align-self: start;
     }
 
     .stat {
@@ -731,6 +730,20 @@
       margin-top: 0.65rem;
       color: var(--muted);
       line-height: 1.6;
+      max-height: 11.5rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .release-body::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 2.8rem;
+      background: linear-gradient(180deg, transparent, var(--paper-solid));
+      pointer-events: none;
     }
 
     .release-body p,
