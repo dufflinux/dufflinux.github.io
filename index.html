@@ -982,22 +982,22 @@
       position: relative;
     }
 
-    .site-footer::before {
-      content: "";
-      position: absolute;
-      top: 0.85rem;
-      bottom: 0.85rem;
-      left: 50%;
-      width: 1px;
-      background: var(--line);
-    }
-
     .footer-credit,
+    .footer-void,
     .footer-host {
       display: inline-flex;
       align-items: center;
       gap: 0.65rem;
       flex: 1 1 0;
+    }
+
+    .footer-void {
+      justify-content: center;
+      color: inherit;
+      text-decoration: none;
+      padding: 0 1.2rem;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
     }
 
     .footer-host {
@@ -1015,6 +1015,13 @@
       color: inherit;
       text-decoration: none;
       padding-right: 1.2rem;
+    }
+
+    .footer-void-logo {
+      width: 1.9rem;
+      height: 1.9rem;
+      object-fit: contain;
+      flex: none;
     }
 
     @keyframes rise {
@@ -1177,13 +1184,20 @@
         justify-content: flex-start;
       }
 
-      .site-footer::before {
-        display: none;
-      }
-
-      .footer-credit {
+      .footer-credit,
+      .footer-void {
+        width: 100%;
         flex: none;
         padding-right: 0;
+        padding-left: 0;
+        border-left: 0;
+        border-right: 0;
+        justify-content: flex-start;
+      }
+
+      .footer-void {
+        padding-top: 1rem;
+        border-top: 1px solid var(--line);
       }
 
     }
@@ -1431,6 +1445,10 @@
       <a class="footer-credit" href="https://github.com/duffnshmrt">
         <img class="footer-avatar" src="https://github.com/duffnshmrt.png?size=64" alt="duffnshmrt GitHub profile">
         <span>Project maintained by duffnshmrt</span>
+      </a>
+      <a class="footer-void" href="https://voidlinux.org/">
+        <img class="footer-void-logo" src="https://repo-fi.voidlinux.org/logos/void.svg" alt="Void Linux logo">
+        <span>Based on Void Linux</span>
       </a>
       <span class="footer-host">
         <svg class="nav-icon" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">
