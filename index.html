@@ -343,17 +343,19 @@
     .hero-copy {
       padding: 5rem 2.2rem 2.2rem;
       border-radius: var(--radius-xl);
-      border: 1px solid rgba(255, 250, 235, 0.48);
+      border: 0.42rem solid rgba(126, 216, 255, 0.58);
       background:
-        linear-gradient(90deg, rgba(255, 255, 255, 0.26), transparent 16%, transparent 82%, rgba(255, 255, 255, 0.16)),
+        linear-gradient(90deg, rgba(126, 216, 255, 0.18), transparent 15%, transparent 82%, rgba(126, 216, 255, 0.15)),
         linear-gradient(180deg, rgba(255, 249, 235, 0.7) 0 4.45rem, transparent 4.45rem),
         radial-gradient(circle at 82% 22%, rgba(255, 240, 171, 0.46), transparent 28%),
         linear-gradient(145deg, rgba(246, 182, 83, 0.92), rgba(171, 87, 21, 0.86));
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.62),
-        inset 1.2rem 0 2.8rem rgba(255, 255, 255, 0.1),
-        inset -1.2rem 0 2.8rem rgba(255, 255, 255, 0.08),
+        inset 1.2rem 0 2.8rem rgba(126, 216, 255, 0.12),
+        inset -1.2rem 0 2.8rem rgba(126, 216, 255, 0.1),
         inset 0 -28px 55px rgba(108, 48, 8, 0.2),
+        0 0 0 1px rgba(224, 250, 255, 0.3),
+        0 0 34px rgba(126, 216, 255, 0.14),
         var(--shadow);
       overflow: visible;
       position: relative;
@@ -363,12 +365,12 @@
     .hero-copy::before {
       content: "";
       position: absolute;
-      inset: 0.45rem;
-      border-radius: calc(var(--radius-xl) - 8px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      inset: -0.24rem;
+      border-radius: inherit;
+      border: 1px solid rgba(226, 250, 255, 0.56);
       background:
-        linear-gradient(90deg, rgba(255, 255, 255, 0.24), transparent 8% 92%, rgba(255, 255, 255, 0.16)),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 36%);
+        linear-gradient(90deg, rgba(214, 247, 255, 0.22), transparent 9% 91%, rgba(214, 247, 255, 0.18)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 36%);
       pointer-events: none;
       z-index: 2;
     }
@@ -394,8 +396,8 @@
 
     .mug-foam {
       position: absolute;
-      inset: 0.48rem 1.2rem auto;
-      height: 3.82rem;
+      inset: 0.28rem 1.2rem auto;
+      height: 3.2rem;
       pointer-events: none;
       z-index: 4;
     }
@@ -416,15 +418,15 @@
     .mug-handle {
       position: absolute;
       top: 50%;
-      left: -1.75rem;
-      width: 2.7rem;
-      height: 6.8rem;
+      left: -2.7rem;
+      width: 3.35rem;
+      height: 7.4rem;
       transform: translateY(-50%);
-      border: 0.52rem solid rgba(255, 250, 235, 0.38);
+      border: 0.52rem solid rgba(126, 216, 255, 0.58);
       border-right: 0;
       border-radius: 2rem 0 0 2rem;
-      background: rgba(255, 255, 255, 0.08);
-      box-shadow: inset 0.45rem 0 0 rgba(255, 255, 255, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.12), 0 12px 28px rgba(0, 0, 0, 0.12);
+      background: rgba(126, 216, 255, 0.08);
+      box-shadow: inset 0.45rem 0 0 rgba(224, 250, 255, 0.18), inset 0 0 0 1px rgba(224, 250, 255, 0.3), 0 12px 28px rgba(0, 0, 0, 0.12);
       opacity: 0.92;
       pointer-events: none;
       z-index: 0;
@@ -460,26 +462,6 @@
       -webkit-mask-size: 1.98rem 0.72rem;
       mask-size: 1.98rem 0.72rem;
       opacity: 0.96;
-    }
-
-    .foam-divider-bubbles {
-      position: absolute;
-      inset: 0.1rem 0 0;
-      height: 1.3rem;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 4% 0.72rem, var(--foam-line) 0 0.2rem, transparent 0.23rem),
-        radial-gradient(circle at 11% 0.24rem, var(--foam-line) 0 0.3rem, transparent 0.33rem),
-        radial-gradient(circle at 19% 0.78rem, var(--foam-line) 0 0.18rem, transparent 0.21rem),
-        radial-gradient(circle at 27% 0.34rem, var(--foam-line) 0 0.24rem, transparent 0.27rem),
-        radial-gradient(circle at 36% 0.82rem, var(--foam-line) 0 0.22rem, transparent 0.25rem),
-        radial-gradient(circle at 45% 0.22rem, var(--foam-line) 0 0.18rem, transparent 0.21rem),
-        radial-gradient(circle at 54% 0.74rem, var(--foam-line) 0 0.28rem, transparent 0.31rem),
-        radial-gradient(circle at 63% 0.3rem, var(--foam-line) 0 0.2rem, transparent 0.23rem),
-        radial-gradient(circle at 72% 0.82rem, var(--foam-line) 0 0.24rem, transparent 0.27rem),
-        radial-gradient(circle at 82% 0.28rem, var(--foam-line) 0 0.18rem, transparent 0.21rem),
-        radial-gradient(circle at 92% 0.7rem, var(--foam-line) 0 0.26rem, transparent 0.29rem);
-      opacity: 0.74;
     }
 
     .foam-divider::after {
@@ -1111,13 +1093,13 @@
             <article class="panel hero-copy">
               <span class="mug-handle" aria-hidden="true"></span>
               <span class="mug-foam" aria-hidden="true">
-                <span style="--x: 7%; --y: 1.08rem; --size: 2.55rem;"></span>
-                <span style="--x: 18%; --y: 0.42rem; --size: 3.05rem; --tone: #fff7e4;"></span>
-                <span style="--x: 31%; --y: 1.18rem; --size: 2.35rem;"></span>
-                <span style="--x: 45%; --y: 0.55rem; --size: 2.8rem; --tone: #fff2d7;"></span>
-                <span style="--x: 59%; --y: 1.1rem; --size: 2.45rem;"></span>
-                <span style="--x: 73%; --y: 0.42rem; --size: 3.08rem; --tone: #fff7e4;"></span>
-                <span style="--x: 90%; --y: 1.12rem; --size: 2.5rem;"></span>
+                <span style="--x: 7%; --y: 0.72rem; --size: 1.85rem;"></span>
+                <span style="--x: 18%; --y: 0.14rem; --size: 2.25rem; --tone: #fff7e4;"></span>
+                <span style="--x: 31%; --y: 0.82rem; --size: 1.75rem;"></span>
+                <span style="--x: 45%; --y: 0.22rem; --size: 2.05rem; --tone: #fff2d7;"></span>
+                <span style="--x: 59%; --y: 0.76rem; --size: 1.82rem;"></span>
+                <span style="--x: 73%; --y: 0.14rem; --size: 2.28rem; --tone: #fff7e4;"></span>
+                <span style="--x: 90%; --y: 0.74rem; --size: 1.85rem;"></span>
               </span>
               <p class="lead">
                 An opinionated distro based off dani-77's d77void Linux distribution, focused on KDE Plasma with BTRFS.🍺
@@ -1175,9 +1157,7 @@
         </article>
       </div>
 
-      <div class="foam-divider" aria-hidden="true">
-        <span class="foam-divider-bubbles"></span>
-      </div>
+      <div class="foam-divider" aria-hidden="true"></div>
 
       <section class="section" id="repo">
         <div class="section-head">
@@ -1203,9 +1183,7 @@
         </article>
       </section>
 
-      <div class="foam-divider" aria-hidden="true">
-        <span class="foam-divider-bubbles"></span>
-      </div>
+      <div class="foam-divider" aria-hidden="true"></div>
 
       <section class="section support-grid" aria-label="Support and issues">
         <div class="support-stack">
