@@ -363,8 +363,8 @@
       right: 0;
       height: 0.9rem;
       background: #fff3d3;
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='48' height='16' viewBox='0 0 48 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 8 C6 2 18 2 24 8 S42 14 48 8 L48 16 L0 16 Z' fill='%23000'/%3E%3C/svg%3E");
-      mask-image: url("data:image/svg+xml,%3Csvg width='48' height='16' viewBox='0 0 48 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 8 C6 2 18 2 24 8 S42 14 48 8 L48 16 L0 16 Z' fill='%23000'/%3E%3C/svg%3E");
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='48' height='16' viewBox='0 0 48 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 8 C4 4 8 4 12 8 S20 12 24 8 S32 4 36 8 S44 12 48 8 L48 16 L0 16 Z' fill='%23000'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg width='48' height='16' viewBox='0 0 48 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 8 C4 4 8 4 12 8 S20 12 24 8 S32 4 36 8 S44 12 48 8 L48 16 L0 16 Z' fill='%23000'/%3E%3C/svg%3E");
       -webkit-mask-repeat: repeat-x;
       mask-repeat: repeat-x;
       -webkit-mask-size: 3rem 1rem;
@@ -592,6 +592,28 @@
       font-family: "Space Grotesk", sans-serif;
       font-size: 1.15rem;
       letter-spacing: -0.03em;
+    }
+
+    .stat-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .stat-logo {
+      width: 1.6rem;
+      height: 1.6rem;
+      object-fit: contain;
+      flex: none;
+    }
+
+    .stat-logo.rounded {
+      border-radius: 0.45rem;
+    }
+
+    .stat-emoji {
+      font-size: 1.45rem;
+      line-height: 1;
     }
 
     .stat p {
@@ -1126,22 +1148,35 @@
           <section class="grid-4">
             <article class="stat">
               <span>Desktop</span>
-              <strong>KDE Plasma</strong>
+              <strong class="stat-title">
+                <img class="stat-logo rounded" src="https://kde.org/stuff/clipart/logo/kde-logo-white-blue-rounded-128x128.png" alt="KDE Plasma logo">
+                KDE Plasma
+              </strong>
               <p>Latest available Plasma stack with a lightly-themed, ready-to-use desktop feel.</p>
             </article>
             <article class="stat">
               <span>Filesystem</span>
-              <strong>BTRFS + Snapshots</strong>
+              <strong class="stat-title">
+                <span class="stat-emoji" aria-hidden="true">📁</span>
+                BTRFS + Snapshots
+              </strong>
               <p>Automatic pre-transaction snapshots and regular backup-friendly behavior out of the box.</p>
             </article>
             <article class="stat">
               <span>Installer</span>
-              <strong>Calamares Live ISO</strong>
+              <strong class="stat-title">
+                <img class="stat-logo" src="https://raw.githubusercontent.com/calamares/calamares/calamares/src/branding/default/squid.png" alt="Calamares logo">
+                Calamares Live ISO
+              </strong>
               <p>Boot a live environment, install graphically, and land in a usable system quickly.</p>
             </article>
             <article class="stat">
               <span>Packages</span>
-              <strong>XBPS + Flatpak</strong>
+              <strong class="stat-title">
+                <img class="stat-logo" src="https://raw.githubusercontent.com/aarnt/octoxbps/master/resources/images/octopi.png" alt="OctoXBPS logo">
+                <img class="stat-logo" src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Flatpak_Logo.svg" alt="Flatpak logo">
+                OctoXBPS + Flatpak
+              </strong>
               <p>OctoXBPS for native packages, update notifications, and Discover-backed Flatpak support.</p>
             </article>
           </section>
@@ -1202,7 +1237,7 @@
               </svg>
             </div>
             <div>
-              <h3 id="stop-killing-games-title">Supporting Stop Killing Games</h3>
+              <h3 id="stop-killing-games-title">Support Stop Killing Games</h3>
               <p>
                 Duff Linux supports the <a href="https://www.stopkillinggames.com/en">Stop Killing Games</a>
                 movement and its push for games to remain playable instead of disappearing when publisher-operated
