@@ -356,7 +356,21 @@
     }
 
     .hero-copy::before {
-      content: none;
+      content: "";
+      position: absolute;
+      top: -0.44rem;
+      left: 0;
+      right: 0;
+      height: 0.9rem;
+      background: #fff3d3;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='48' height='16' viewBox='0 0 48 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 8 C6 2 18 2 24 8 S42 14 48 8 L48 16 L0 16 Z' fill='%23000'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg width='48' height='16' viewBox='0 0 48 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 8 C6 2 18 2 24 8 S42 14 48 8 L48 16 L0 16 Z' fill='%23000'/%3E%3C/svg%3E");
+      -webkit-mask-repeat: repeat-x;
+      mask-repeat: repeat-x;
+      -webkit-mask-size: 3rem 1rem;
+      mask-size: 3rem 1rem;
+      pointer-events: none;
+      z-index: 3;
     }
 
     .hero-copy::after {
