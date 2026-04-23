@@ -31,6 +31,7 @@
       --accent: #e18a49;
       --accent-deep: #f2a766;
       --accent-soft: rgba(225, 138, 73, 0.16);
+      --fizz: rgba(255, 255, 255, 0.86);
       --green: #67b798;
       --shadow: 0 20px 70px rgba(0, 0, 0, 0.28);
       --radius-xl: 32px;
@@ -55,6 +56,7 @@
       --accent: #c96b2c;
       --accent-deep: #8c4214;
       --accent-soft: rgba(201, 107, 44, 0.14);
+      --fizz: rgba(140, 66, 20, 0.72);
       --green: #2b6b57;
       --shadow: 0 20px 70px rgba(70, 37, 15, 0.15);
     }
@@ -185,6 +187,7 @@
       flex-wrap: wrap;
       justify-content: flex-end;
       gap: 0.65rem;
+      margin-left: auto;
     }
 
     .nav a {
@@ -220,20 +223,18 @@
     }
 
     .sticky-download {
-      max-width: 0;
+      width: 8.6rem;
       opacity: 0;
-      overflow: hidden;
+      visibility: hidden;
       pointer-events: none;
-      padding-inline: 0;
       white-space: nowrap;
-      transition: max-width 180ms ease, opacity 180ms ease, padding 180ms ease, transform 160ms ease;
+      transition: opacity 180ms ease, visibility 180ms ease, transform 160ms ease;
     }
 
     .topbar.is-stuck .sticky-download {
-      max-width: 15rem;
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
-      padding-inline: 1rem;
     }
 
     .nav-icon {
@@ -270,7 +271,8 @@
     .top-left {
       display: grid;
       gap: 1.5rem;
-      align-content: start;
+      grid-template-rows: auto 1fr;
+      align-content: stretch;
     }
 
     .panel,
@@ -284,10 +286,7 @@
     }
 
     .panel::after,
-    .stat::after,
-    .feed::after,
-    .movement::after,
-    .donate::after {
+    .feed::after {
       content: "";
       position: absolute;
       top: 0.75rem;
@@ -297,18 +296,19 @@
       opacity: 0.22;
       pointer-events: none;
       background:
-        radial-gradient(circle at 0.45rem 0.55rem, rgba(255, 255, 255, 0.9) 0 0.18rem, transparent 0.21rem),
-        radial-gradient(circle at 1.55rem 0.25rem, rgba(255, 255, 255, 0.75) 0 0.14rem, transparent 0.17rem),
-        radial-gradient(circle at 2.45rem 0.9rem, rgba(255, 255, 255, 0.8) 0 0.2rem, transparent 0.23rem),
-        radial-gradient(circle at 3.55rem 0.45rem, rgba(255, 255, 255, 0.65) 0 0.12rem, transparent 0.15rem),
-        radial-gradient(circle at 4.2rem 1.3rem, rgba(255, 255, 255, 0.7) 0 0.16rem, transparent 0.19rem);
+        radial-gradient(circle at 0.45rem 0.55rem, var(--fizz) 0 0.18rem, transparent 0.21rem),
+        radial-gradient(circle at 1.55rem 0.25rem, var(--fizz) 0 0.14rem, transparent 0.17rem),
+        radial-gradient(circle at 2.45rem 0.9rem, var(--fizz) 0 0.2rem, transparent 0.23rem),
+        radial-gradient(circle at 3.55rem 0.45rem, var(--fizz) 0 0.12rem, transparent 0.15rem),
+        radial-gradient(circle at 4.2rem 1.3rem, var(--fizz) 0 0.16rem, transparent 0.19rem);
     }
 
     .hero-copy {
       padding: 2.2rem;
       border-radius: var(--radius-xl);
-      overflow: hidden;
+      overflow: visible;
       position: relative;
+      isolation: isolate;
     }
 
     .hero-copy::before {
@@ -318,6 +318,28 @@
       height: 18rem;
       background: radial-gradient(circle, rgba(201, 107, 44, 0.2), transparent 58%);
       pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-copy > :not(.mug-handle) {
+      position: relative;
+      z-index: 1;
+    }
+
+    .mug-handle {
+      position: absolute;
+      top: 50%;
+      left: -1.75rem;
+      width: 2.7rem;
+      height: 6.8rem;
+      transform: translateY(-50%);
+      border: 0.52rem solid color-mix(in srgb, var(--accent-deep), var(--paper-solid) 34%);
+      border-right: 0;
+      border-radius: 2rem 0 0 2rem;
+      box-shadow: inset 0 0 0 1px var(--line), 0 12px 28px rgba(0, 0, 0, 0.12);
+      opacity: 0.78;
+      pointer-events: none;
+      z-index: 0;
     }
 
     h2,
@@ -407,6 +429,7 @@
 
     .top-left .grid-4 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-self: stretch;
     }
 
     .stat {
@@ -459,7 +482,7 @@
       grid-template-areas:
         "support issues";
       gap: 1rem;
-      align-items: start;
+      align-items: stretch;
     }
 
     .feed {
@@ -547,17 +570,36 @@
     }
 
     .feed-releases {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
       min-height: 100%;
+    }
+
+    .feed-releases .section-action {
+      align-self: flex-start;
+      margin-top: auto;
     }
 
     .feed-issues {
       grid-area: issues;
     }
 
+    .issues-panel {
+      display: flex;
+      grid-area: issues;
+      min-height: 100%;
+    }
+
+    .issues-panel .feed-issues {
+      flex: 1;
+    }
+
     .support-stack {
       grid-area: support;
       display: grid;
       gap: 1rem;
+      align-content: stretch;
     }
 
     .wiki-body {
@@ -680,6 +722,11 @@
       gap: 0.65rem;
     }
 
+    .footer-host {
+      padding-left: 1.2rem;
+      border-left: 1px solid var(--line);
+    }
+
     .footer-avatar {
       width: 2rem;
       height: 2rem;
@@ -760,6 +807,10 @@
         padding: 1.3rem;
       }
 
+      .mug-handle {
+        display: none;
+      }
+
       .movement {
         grid-template-columns: 1fr;
       }
@@ -767,6 +818,14 @@
       .site-footer {
         align-items: flex-start;
         flex-direction: column;
+      }
+
+      .footer-host {
+        width: 100%;
+        padding-top: 1rem;
+        padding-left: 0;
+        border-top: 1px solid var(--line);
+        border-left: 0;
       }
 
     }
@@ -818,6 +877,7 @@
         <div class="top-left">
           <section class="hero">
             <article class="panel hero-copy">
+              <span class="mug-handle" aria-hidden="true"></span>
               <p class="lead">
                 An opinionated distro based off dani-77's d77void Linux distribution, focused on KDE Plasma with BTRFS.🍺
               </p>
@@ -928,7 +988,7 @@
           </article>
         </div>
 
-        <div>
+        <div class="issues-panel">
           <article class="feed feed-issues">
             <div class="feed-top">
               <div>
