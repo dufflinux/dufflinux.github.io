@@ -151,6 +151,12 @@
       transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
     }
 
+    .nav-icon {
+      width: 1rem;
+      height: 1rem;
+      flex: none;
+    }
+
     .nav a:hover,
     .button:hover,
     .stat:hover,
@@ -186,7 +192,6 @@
       pointer-events: none;
     }
 
-    h1,
     h2,
     h3 {
       font-family: "Space Grotesk", sans-serif;
@@ -194,15 +199,8 @@
       margin: 0;
     }
 
-    h1 {
-      margin-top: 1.2rem;
-      font-size: clamp(3rem, 7vw, 5.8rem);
-      line-height: 0.92;
-      max-width: 11ch;
-    }
-
     .lead {
-      margin: 1.25rem 0 0;
+      margin: 0;
       max-width: 40rem;
       color: var(--muted);
       font-size: 1.08rem;
@@ -240,6 +238,12 @@
       background: rgba(255, 251, 245, 0.82);
       color: var(--ink);
       border-color: var(--line);
+    }
+
+    .button.tertiary {
+      background: rgba(201, 107, 44, 0.1);
+      color: var(--accent-deep);
+      border-color: rgba(201, 107, 44, 0.2);
     }
 
     .section {
@@ -393,6 +397,44 @@
       color: var(--muted);
     }
 
+    .feed-wide {
+      grid-column: 1 / -1;
+    }
+
+    .wiki-body {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .wiki-block {
+      padding-top: 1rem;
+      border-top: 1px solid rgba(25, 21, 18, 0.08);
+    }
+
+    .wiki-block:first-child {
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .wiki-block h4,
+    .wiki-question {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.08rem;
+      letter-spacing: -0.03em;
+    }
+
+    .wiki-block p,
+    .wiki-block li {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .wiki-block ul {
+      margin: 0.75rem 0 0;
+      padding-left: 1.2rem;
+    }
+
     @keyframes rise {
       from {
         opacity: 0;
@@ -455,9 +497,6 @@
         padding: 1.3rem;
       }
 
-      h1 {
-        font-size: clamp(2.6rem, 15vw, 4rem);
-      }
     }
   </style>
 </head>
@@ -471,22 +510,37 @@
         <span>Duff Linux</span>
       </a>
       <nav class="nav" aria-label="Primary">
-        <a href="#repo">Repo</a>
-        <a href="https://github.com/duffnshmrt/duff-linux/wiki">Wiki</a>
-        <a href="https://github.com/duffnshmrt/duff-linux/issues">Issues</a>
+        <a href="https://github.com/duffnshmrt/duff-linux">
+          <svg class="nav-icon" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.73 0 8.33c0 3.68 2.29 6.79 5.47 7.9.4.08.55-.18.55-.4 0-.2-.01-.86-.01-1.56-2.01.38-2.53-.5-2.69-.96-.09-.24-.48-.97-.82-1.17-.28-.16-.68-.57-.01-.58.63-.01 1.08.6 1.23.85.72 1.26 1.87.9 2.33.68.07-.54.28-.9.5-1.11-1.78-.21-3.64-.93-3.64-4.15 0-.92.31-1.67.82-2.26-.08-.21-.36-1.08.08-2.24 0 0 .67-.22 2.2.86a7.3 7.3 0 0 1 2-.29c.68 0 1.36.1 2 .29 1.53-1.09 2.2-.86 2.2-.86.44 1.16.16 2.03.08 2.24.51.59.82 1.34.82 2.26 0 3.23-1.87 3.94-3.65 4.15.29.26.54.75.54 1.52 0 1.1-.01 1.99-.01 2.26 0 .22.14.49.55.4A8.35 8.35 0 0 0 16 8.33C16 3.73 12.42 0 8 0Z"/>
+          </svg>
+          Repo
+        </a>
+        <a href="https://github.com/duffnshmrt/duff-linux/wiki">
+          <svg class="nav-icon" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.73 0 8.33c0 3.68 2.29 6.79 5.47 7.9.4.08.55-.18.55-.4 0-.2-.01-.86-.01-1.56-2.01.38-2.53-.5-2.69-.96-.09-.24-.48-.97-.82-1.17-.28-.16-.68-.57-.01-.58.63-.01 1.08.6 1.23.85.72 1.26 1.87.9 2.33.68.07-.54.28-.9.5-1.11-1.78-.21-3.64-.93-3.64-4.15 0-.92.31-1.67.82-2.26-.08-.21-.36-1.08.08-2.24 0 0 .67-.22 2.2.86a7.3 7.3 0 0 1 2-.29c.68 0 1.36.1 2 .29 1.53-1.09 2.2-.86 2.2-.86.44 1.16.16 2.03.08 2.24.51.59.82 1.34.82 2.26 0 3.23-1.87 3.94-3.65 4.15.29.26.54.75.54 1.52 0 1.1-.01 1.99-.01 2.26 0 .22.14.49.55.4A8.35 8.35 0 0 0 16 8.33C16 3.73 12.42 0 8 0Z"/>
+          </svg>
+          Wiki
+        </a>
+        <a href="https://github.com/duffnshmrt/duff-linux/issues">
+          <svg class="nav-icon" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.73 0 8.33c0 3.68 2.29 6.79 5.47 7.9.4.08.55-.18.55-.4 0-.2-.01-.86-.01-1.56-2.01.38-2.53-.5-2.69-.96-.09-.24-.48-.97-.82-1.17-.28-.16-.68-.57-.01-.58.63-.01 1.08.6 1.23.85.72 1.26 1.87.9 2.33.68.07-.54.28-.9.5-1.11-1.78-.21-3.64-.93-3.64-4.15 0-.92.31-1.67.82-2.26-.08-.21-.36-1.08.08-2.24 0 0 .67-.22 2.2.86a7.3 7.3 0 0 1 2-.29c.68 0 1.36.1 2 .29 1.53-1.09 2.2-.86 2.2-.86.44 1.16.16 2.03.08 2.24.51.59.82 1.34.82 2.26 0 3.23-1.87 3.94-3.65 4.15.29.26.54.75.54 1.52 0 1.1-.01 1.99-.01 2.26 0 .22.14.49.55.4A8.35 8.35 0 0 0 16 8.33C16 3.73 12.42 0 8 0Z"/>
+          </svg>
+          Issues
+        </a>
       </nav>
     </header>
 
     <main>
       <section class="hero">
         <article class="panel hero-copy">
-          <h1>Duff Linux</h1>
           <p class="lead">
             An opinionated distro based off dani-77's d77void Linux distribution, focused on KDE Plasma with BTRFS.🍺
           </p>
           <div class="hero-actions">
             <a class="button primary" href="https://sourceforge.net/projects/duff-linux/files/latest/download">Download Latest ISO</a>
             <a class="button secondary" href="https://github.com/duffnshmrt/duff-linux">View Source on GitHub</a>
+            <a class="button tertiary" href="https://github.com/duffnshmrt/duff-linux/wiki/ISO-Generation-Guide">ISO Generation Guide</a>
           </div>
         </article>
       </section>
@@ -553,12 +607,12 @@
             <a class="feed-link" href="https://github.com/duffnshmrt/duff-linux/issues">Open the issue tracker</a>
           </article>
 
-          <article class="feed">
+          <article class="feed feed-wide">
             <div class="feed-top">
               <div>
                 <span class="feed-kicker">Wiki</span>
                 <h3>Wiki Home</h3>
-                <p>A live preview of the project wiki homepage, pulled from the GitHub wiki itself.</p>
+                <p>A synced reader for the full project wiki homepage, pulled from the GitHub wiki itself.</p>
               </div>
             </div>
             <div class="feed-list" id="wiki-feed">
@@ -566,27 +620,12 @@
             </div>
             <a class="feed-link" href="https://github.com/duffnshmrt/duff-linux/wiki">Open the wiki</a>
           </article>
-
-          <article class="feed">
-            <div class="feed-top">
-              <div>
-                <span class="feed-kicker">Guide</span>
-                <h3>ISO Generation Guide</h3>
-                <p>The build guide can live here as a live project preview instead of static homepage copy.</p>
-              </div>
-            </div>
-            <div class="feed-list" id="guide-feed">
-              <p class="feed-loading">Loading the ISO Generation Guide from GitHub...</p>
-            </div>
-            <a class="feed-link" href="https://github.com/duffnshmrt/duff-linux/wiki/ISO-Generation-Guide">Open the full guide</a>
-          </article>
         </div>
       </section>
     </main>
 
   </div>
   <script>
-    const repoBase = "https://github.com/duffnshmrt/duff-linux";
     const apiBase = "https://api.github.com/repos/duffnshmrt/duff-linux";
     const wikiBase = "https://raw.githubusercontent.com/wiki/duffnshmrt/duff-linux";
 
@@ -623,113 +662,74 @@
         .trim();
     }
 
-    function markdownBullets(markdown, limit) {
-      return markdown
-        .split(/\r?\n/)
-        .filter((line) => /^\s*-\s+/.test(line))
-        .map((line) => line.replace(/^\s*-\s+/, "").replace(/`([^`]+)`/g, "$1").trim())
-        .filter(Boolean)
-        .slice(0, limit);
-    }
-
-    function faqEntriesFromWiki(markdown, limit) {
-      const lines = markdown.split(/\r?\n/).map((line) => line.trim());
-      const entries = [];
-
-      for (let index = 0; index < lines.length; index += 1) {
-        const line = lines[index];
-        if (!line || line.startsWith("#") || !line.endsWith("?")) {
-          continue;
-        }
-
-        const answers = [];
-        let cursor = index + 1;
-
-        while (cursor < lines.length) {
-          const next = lines[cursor];
-
-          if (!next) {
-            if (answers.length) {
-              break;
-            }
-            cursor += 1;
-            continue;
-          }
-
-          if (next.startsWith("#") || next.endsWith("?")) {
-            break;
-          }
-
-          if (next.startsWith("- ")) {
-            answers.push(next.replace(/^- /, "").trim());
-          }
-
-          cursor += 1;
-        }
-
-        if (answers.length) {
-          entries.push({
-            question: line,
-            answer: answers.join(" ")
-          });
-        }
-
-        if (entries.length >= limit) {
-          break;
-        }
-      }
-
-      return entries;
-    }
-
-    function guideSectionsFromMarkdown(markdown, limit) {
+    function renderWikiMarkdown(markdown) {
       const lines = markdown.split(/\r?\n/);
-      const sections = [];
+      let html = "";
+      let paragraph = [];
+      let listItems = [];
 
-      for (let index = 0; index < lines.length; index += 1) {
-        const line = lines[index].trim();
-        if (!line.startsWith("### ")) {
+      function flushParagraph() {
+        if (!paragraph.length) {
+          return;
+        }
+
+        const text = paragraph.join(" ").trim();
+        if (text.endsWith("?")) {
+          html += `<div class="wiki-block"><p class="wiki-question">${escapeHtml(text)}</p></div>`;
+        } else {
+          html += `<div class="wiki-block"><p>${escapeHtml(text)}</p></div>`;
+        }
+        paragraph = [];
+      }
+
+      function flushList() {
+        if (!listItems.length) {
+          return;
+        }
+
+        html += `<div class="wiki-block"><ul>${listItems
+          .map((item) => `<li>${escapeHtml(item)}</li>`)
+          .join("")}</ul></div>`;
+        listItems = [];
+      }
+
+      for (const rawLine of lines) {
+        const line = rawLine.trim();
+
+        if (!line || line === "---") {
+          flushParagraph();
+          flushList();
           continue;
         }
 
-        const section = {
-          title: line.replace(/^### /, "").trim(),
-          commands: [],
-          bullets: []
-        };
-
-        let cursor = index + 1;
-        let inCodeBlock = false;
-
-        while (cursor < lines.length) {
-          const next = lines[cursor].trim();
-
-          if (next.startsWith("### ")) {
-            break;
-          }
-
-          if (next.startsWith("```")) {
-            inCodeBlock = !inCodeBlock;
-            cursor += 1;
-            continue;
-          }
-
-          if (inCodeBlock && next) {
-            section.commands.push(next);
-          } else if (next.startsWith("- ")) {
-            section.bullets.push(next.replace(/^- /, "").replace(/`([^`]+)`/g, "$1").trim());
-          }
-
-          cursor += 1;
+        if (line.startsWith("# ")) {
+          flushParagraph();
+          flushList();
+          html += `<div class="wiki-block"><h4>${escapeHtml(line.replace(/^# /, ""))}</h4></div>`;
+          continue;
         }
 
-        sections.push(section);
-        if (sections.length >= limit) {
-          break;
+        if (line.startsWith("## ")) {
+          flushParagraph();
+          flushList();
+          html += `<div class="wiki-block"><h4>${escapeHtml(line.replace(/^## /, ""))}</h4></div>`;
+          continue;
         }
+
+        if (line.startsWith("- ")) {
+          flushParagraph();
+          listItems.push(line.replace(/^- /, "").replace(/`([^`]+)`/g, "$1"));
+          continue;
+        }
+
+        flushList();
+        paragraph.push(line.replace(/`([^`]+)`/g, "$1"));
       }
 
-      return sections;
+      flushParagraph();
+      flushList();
+
+      return html || `<p class="feed-empty">The wiki preview is empty right now.</p>`;
     }
 
     function shortText(value, limit) {
@@ -828,54 +828,15 @@
     async function loadWikiHome() {
       try {
         const markdown = await fetchText(`${wikiBase}/Home.md`);
-        const faqs = faqEntriesFromWiki(markdown, 3);
-        const faqHtml = faqs.length
-          ? faqs.map((entry) => `
-              <article class="feed-item">
-                <strong>${escapeHtml(entry.question)}</strong>
-                <p>${escapeHtml(shortText(entry.answer, 190))}</p>
-              </article>
-            `).join("")
-          : `<p class="feed-empty">No FAQ entries were found in the wiki preview.</p>`;
-
-        setFeedHtml(
-          "wiki-feed",
-          `
-            <p>A few common questions from the Duff Linux wiki homepage.</p>
-            ${faqHtml}
-          `
-        );
+        setFeedHtml("wiki-feed", `<div class="wiki-body">${renderWikiMarkdown(markdown)}</div>`);
       } catch (error) {
         setFeedHtml("wiki-feed", `<p class="feed-empty">The wiki preview could not be loaded right now.</p>`);
-      }
-    }
-
-    async function loadGuide() {
-      try {
-        const markdown = await fetchText(`${wikiBase}/ISO-Generation-Guide.md`);
-        const sections = guideSectionsFromMarkdown(markdown, 2);
-
-        const html = `
-          <p>Helper scripts and core commands pulled from the ISO Generation Guide.</p>
-          ${sections.map((section) => `
-            <article class="feed-item">
-              <strong>${escapeHtml(section.title)}</strong>
-              ${section.commands[0] ? `<code>${escapeHtml(section.commands[0])}</code>` : ""}
-              ${section.bullets[0] ? `<p>${escapeHtml(shortText(section.bullets[0], 180))}</p>` : ""}
-            </article>
-          `).join("")}
-        `;
-
-        setFeedHtml("guide-feed", html);
-      } catch (error) {
-        setFeedHtml("guide-feed", `<p class="feed-empty">The ISO guide preview could not be loaded right now.</p>`);
       }
     }
 
     loadReleases();
     loadIssues();
     loadWikiHome();
-    loadGuide();
   </script>
 </body>
 </html>
