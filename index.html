@@ -370,13 +370,13 @@
       height: 3.72rem;
       border-radius: 999px;
       background:
-        radial-gradient(circle at 1.4rem 1.35rem, #fffdf7 0 1.28rem, transparent 1.34rem),
-        radial-gradient(circle at 4.3rem 0.98rem, #fff7e5 0 1.56rem, transparent 1.64rem),
-        radial-gradient(circle at 7.6rem 1.42rem, #fffdf7 0 1.18rem, transparent 1.26rem),
-        radial-gradient(circle at 32% 0.98rem, #fff2d7 0 1.34rem, transparent 1.42rem),
-        radial-gradient(circle at 50% 1.34rem, #fffdf7 0 1.28rem, transparent 1.36rem),
-        radial-gradient(circle at 68% 0.95rem, #fff6df 0 1.56rem, transparent 1.64rem),
-        radial-gradient(circle at 86% 1.32rem, #fffdf7 0 1.2rem, transparent 1.28rem);
+        radial-gradient(circle at 7% 1.34rem, #fffdf7 0 1.26rem, transparent 1.34rem),
+        radial-gradient(circle at 19% 0.98rem, #fff6df 0 1.48rem, transparent 1.58rem),
+        radial-gradient(circle at 33% 1.42rem, #fffdf7 0 1.16rem, transparent 1.24rem),
+        radial-gradient(circle at 48% 1.02rem, #fff2d7 0 1.38rem, transparent 1.47rem),
+        radial-gradient(circle at 62% 1.36rem, #fffdf7 0 1.18rem, transparent 1.27rem),
+        radial-gradient(circle at 76% 0.98rem, #fff7e4 0 1.5rem, transparent 1.6rem),
+        radial-gradient(circle at 92% 1.34rem, #fffdf7 0 1.22rem, transparent 1.3rem);
       box-shadow: 0 14px 24px rgba(111, 52, 8, 0.14);
       pointer-events: none;
       z-index: 3;
@@ -417,14 +417,37 @@
       right: 0;
       top: 0.78rem;
       height: 0.95rem;
-      background: var(--foam-line);
+      background:
+        radial-gradient(circle at 8% 0.12rem, var(--foam-line) 0 0.28rem, transparent 0.31rem),
+        radial-gradient(circle at 19% 0.42rem, var(--foam-line) 0 0.18rem, transparent 0.21rem),
+        radial-gradient(circle at 33% 0.02rem, var(--foam-line) 0 0.24rem, transparent 0.27rem),
+        radial-gradient(circle at 48% 0.38rem, var(--foam-line) 0 0.16rem, transparent 0.19rem),
+        radial-gradient(circle at 63% 0.1rem, var(--foam-line) 0 0.26rem, transparent 0.29rem),
+        radial-gradient(circle at 78% 0.4rem, var(--foam-line) 0 0.18rem, transparent 0.21rem),
+        radial-gradient(circle at 92% 0.08rem, var(--foam-line) 0 0.28rem, transparent 0.31rem),
+        var(--foam-line);
       -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='32' height='10' viewBox='0 0 32 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 5 C4 1 12 1 16 5 S28 9 32 5' fill='none' stroke='%23000' stroke-width='3.6' stroke-linecap='round'/%3E%3C/svg%3E");
       mask-image: url("data:image/svg+xml,%3Csvg width='32' height='10' viewBox='0 0 32 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 5 C4 1 12 1 16 5 S28 9 32 5' fill='none' stroke='%23000' stroke-width='3.6' stroke-linecap='round'/%3E%3C/svg%3E");
       -webkit-mask-repeat: repeat-x;
       mask-repeat: repeat-x;
-      -webkit-mask-size: 2rem 0.72rem;
-      mask-size: 2rem 0.72rem;
+      -webkit-mask-size: 1.98rem 0.72rem;
+      mask-size: 1.98rem 0.72rem;
       opacity: 0.96;
+    }
+
+    .foam-divider-bubbles {
+      position: absolute;
+      inset: 0.42rem 0 0;
+      height: 0.9rem;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 8% 0.34rem, var(--foam-line) 0 0.26rem, transparent 0.29rem),
+        radial-gradient(circle at 21% 0.05rem, var(--foam-line) 0 0.18rem, transparent 0.21rem),
+        radial-gradient(circle at 36% 0.3rem, var(--foam-line) 0 0.22rem, transparent 0.25rem),
+        radial-gradient(circle at 54% 0.08rem, var(--foam-line) 0 0.18rem, transparent 0.21rem),
+        radial-gradient(circle at 71% 0.34rem, var(--foam-line) 0 0.24rem, transparent 0.27rem),
+        radial-gradient(circle at 92% 0.06rem, var(--foam-line) 0 0.2rem, transparent 0.23rem);
+      opacity: 0.72;
     }
 
     .foam-divider::after {
@@ -439,8 +462,8 @@
       mask-image: url("data:image/svg+xml,%3Csvg width='32' height='10' viewBox='0 0 32 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 5 C4 1 12 1 16 5 S28 9 32 5' fill='none' stroke='%23000' stroke-width='3.6' stroke-linecap='round'/%3E%3C/svg%3E");
       -webkit-mask-repeat: repeat-x;
       mask-repeat: repeat-x;
-      -webkit-mask-size: 2rem 0.72rem;
-      mask-size: 2rem 0.72rem;
+      -webkit-mask-size: 1.98rem 0.72rem;
+      mask-size: 1.98rem 0.72rem;
       opacity: 0.98;
       pointer-events: none;
     }
@@ -1111,7 +1134,9 @@
         </article>
       </div>
 
-      <div class="foam-divider" aria-hidden="true"></div>
+      <div class="foam-divider" aria-hidden="true">
+        <span class="foam-divider-bubbles"></span>
+      </div>
 
       <section class="section" id="repo">
         <div class="section-head">
@@ -1137,7 +1162,9 @@
         </article>
       </section>
 
-      <div class="foam-divider" aria-hidden="true"></div>
+      <div class="foam-divider" aria-hidden="true">
+        <span class="foam-divider-bubbles"></span>
+      </div>
 
       <section class="section support-grid" aria-label="Support and issues">
         <div class="support-stack">
