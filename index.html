@@ -269,8 +269,7 @@
       letter-spacing: -0.03em;
     }
 
-    .stat p,
-    .intro p {
+    .stat p {
       margin: 0.6rem 0 0;
       color: var(--muted);
       line-height: 1.6;
@@ -290,47 +289,6 @@
       color: var(--muted);
       max-width: 40rem;
       line-height: 1.6;
-    }
-
-    .intro {
-      padding: 1.5rem;
-      border-radius: var(--radius-xl);
-    }
-
-    .intro {
-      background: var(--paper-strong);
-    }
-
-    .bullets {
-      display: grid;
-      gap: 0.8rem;
-      margin-top: 1.2rem;
-    }
-
-    .bullet {
-      display: flex;
-      gap: 0.8rem;
-      align-items: flex-start;
-      padding-bottom: 0.8rem;
-      border-bottom: 1px solid rgba(25, 21, 18, 0.08);
-    }
-
-    .bullet:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .bullet-mark {
-      flex: none;
-      width: 1.8rem;
-      height: 1.8rem;
-      border-radius: 999px;
-      display: grid;
-      place-items: center;
-      color: #fff8f1;
-      background: linear-gradient(135deg, #2b6b57, #17392f);
-      font-size: 0.82rem;
-      font-weight: 700;
     }
 
     .stat span {
@@ -412,6 +370,17 @@
       letter-spacing: -0.03em;
     }
 
+    .feed-item code {
+      display: inline-block;
+      margin-top: 0.55rem;
+      padding: 0.28rem 0.55rem;
+      border-radius: 0.7rem;
+      background: rgba(25, 21, 18, 0.06);
+      color: var(--ink);
+      font-family: "IBM Plex Sans", sans-serif;
+      font-size: 0.94rem;
+    }
+
     .feed-link {
       display: inline-flex;
       align-items: center;
@@ -438,7 +407,6 @@
 
     .hero-copy,
     .stat,
-    .intro,
     .feed {
       animation: rise 600ms ease both;
     }
@@ -483,8 +451,7 @@
         grid-template-columns: 1fr;
       }
 
-      .hero-copy,
-      .intro {
+      .hero-copy {
         padding: 1.3rem;
       }
 
@@ -544,47 +511,6 @@
           <span>Packages</span>
           <strong>XBPS + Flatpak</strong>
           <p>OctoXBPS for native packages, update notifications, and Discover-backed Flatpak support.</p>
-        </article>
-      </section>
-
-      <section class="section">
-        <article class="panel intro">
-          <div class="section-head">
-            <div>
-              <h2>Quick Overview</h2>
-              <p>The current project focus is clear and practical: install fast, recover safely, and keep the platform approachable.</p>
-            </div>
-          </div>
-          <div class="bullets">
-            <div class="bullet">
-              <div class="bullet-mark">1</div>
-              <div>
-                <strong>Kernel variants available</strong>
-                <p>Images are built around multiple kernel tracks, including current options highlighted in the main project README.</p>
-              </div>
-            </div>
-            <div class="bullet">
-              <div class="bullet-mark">2</div>
-              <div>
-                <strong>Live environment first</strong>
-                <p>Boot into a usable session, launch Calamares, and install from a system that already reflects the desktop vision.</p>
-              </div>
-            </div>
-            <div class="bullet">
-              <div class="bullet-mark">3</div>
-              <div>
-                <strong>Package management without friction</strong>
-                <p>OctoXBPS and OctoXBPS Notifier help native package management feel less bare while keeping Void’s native stack intact.</p>
-              </div>
-            </div>
-            <div class="bullet">
-              <div class="bullet-mark">4</div>
-              <div>
-                <strong>Built for people who tinker</strong>
-                <p>The public repo includes ISO build scripts and helper tooling, so the distro is not a black box if you want to inspect or rebuild it.</p>
-              </div>
-            </div>
-          </div>
         </article>
       </section>
 
@@ -706,6 +632,106 @@
         .slice(0, limit);
     }
 
+    function faqEntriesFromWiki(markdown, limit) {
+      const lines = markdown.split(/\r?\n/).map((line) => line.trim());
+      const entries = [];
+
+      for (let index = 0; index < lines.length; index += 1) {
+        const line = lines[index];
+        if (!line || line.startsWith("#") || !line.endsWith("?")) {
+          continue;
+        }
+
+        const answers = [];
+        let cursor = index + 1;
+
+        while (cursor < lines.length) {
+          const next = lines[cursor];
+
+          if (!next) {
+            if (answers.length) {
+              break;
+            }
+            cursor += 1;
+            continue;
+          }
+
+          if (next.startsWith("#") || next.endsWith("?")) {
+            break;
+          }
+
+          if (next.startsWith("- ")) {
+            answers.push(next.replace(/^- /, "").trim());
+          }
+
+          cursor += 1;
+        }
+
+        if (answers.length) {
+          entries.push({
+            question: line,
+            answer: answers.join(" ")
+          });
+        }
+
+        if (entries.length >= limit) {
+          break;
+        }
+      }
+
+      return entries;
+    }
+
+    function guideSectionsFromMarkdown(markdown, limit) {
+      const lines = markdown.split(/\r?\n/);
+      const sections = [];
+
+      for (let index = 0; index < lines.length; index += 1) {
+        const line = lines[index].trim();
+        if (!line.startsWith("### ")) {
+          continue;
+        }
+
+        const section = {
+          title: line.replace(/^### /, "").trim(),
+          commands: [],
+          bullets: []
+        };
+
+        let cursor = index + 1;
+        let inCodeBlock = false;
+
+        while (cursor < lines.length) {
+          const next = lines[cursor].trim();
+
+          if (next.startsWith("### ")) {
+            break;
+          }
+
+          if (next.startsWith("```")) {
+            inCodeBlock = !inCodeBlock;
+            cursor += 1;
+            continue;
+          }
+
+          if (inCodeBlock && next) {
+            section.commands.push(next);
+          } else if (next.startsWith("- ")) {
+            section.bullets.push(next.replace(/^- /, "").replace(/`([^`]+)`/g, "$1").trim());
+          }
+
+          cursor += 1;
+        }
+
+        sections.push(section);
+        if (sections.length >= limit) {
+          break;
+        }
+      }
+
+      return sections;
+    }
+
     function shortText(value, limit) {
       if (value.length <= limit) {
         return value;
@@ -802,18 +828,21 @@
     async function loadWikiHome() {
       try {
         const markdown = await fetchText(`${wikiBase}/Home.md`);
-        const summary = shortText(plainTextFromMarkdown(markdown), 260);
-        const bullets = markdownBullets(markdown, 3);
-
-        const bulletHtml = bullets.length
-          ? bullets.map((item) => `<article class="feed-item"><strong>${escapeHtml(item)}</strong></article>`).join("")
-          : "";
+        const faqs = faqEntriesFromWiki(markdown, 3);
+        const faqHtml = faqs.length
+          ? faqs.map((entry) => `
+              <article class="feed-item">
+                <strong>${escapeHtml(entry.question)}</strong>
+                <p>${escapeHtml(shortText(entry.answer, 190))}</p>
+              </article>
+            `).join("")
+          : `<p class="feed-empty">No FAQ entries were found in the wiki preview.</p>`;
 
         setFeedHtml(
           "wiki-feed",
           `
-            <p>${escapeHtml(summary)}</p>
-            ${bulletHtml}
+            <p>A few common questions from the Duff Linux wiki homepage.</p>
+            ${faqHtml}
           `
         );
       } catch (error) {
@@ -824,14 +853,15 @@
     async function loadGuide() {
       try {
         const markdown = await fetchText(`${wikiBase}/ISO-Generation-Guide.md`);
-        const summary = shortText(plainTextFromMarkdown(markdown), 220);
-        const bullets = markdownBullets(markdown, 4);
+        const sections = guideSectionsFromMarkdown(markdown, 2);
 
         const html = `
-          <p>${escapeHtml(summary)}</p>
-          ${bullets.map((item) => `
+          <p>Helper scripts and core commands pulled from the ISO Generation Guide.</p>
+          ${sections.map((section) => `
             <article class="feed-item">
-              <strong>${escapeHtml(item)}</strong>
+              <strong>${escapeHtml(section.title)}</strong>
+              ${section.commands[0] ? `<code>${escapeHtml(section.commands[0])}</code>` : ""}
+              ${section.bullets[0] ? `<p>${escapeHtml(shortText(section.bullets[0], 180))}</p>` : ""}
             </article>
           `).join("")}
         `;
