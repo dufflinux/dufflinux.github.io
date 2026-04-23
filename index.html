@@ -140,12 +140,12 @@
       font-weight: 700;
       letter-spacing: -0.04em;
       font-size: 1.15rem;
-      grid-column: 1 / -1;
     }
 
     .brand-wrap {
-      display: grid;
-      grid-template-columns: 2.8rem auto;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
       gap: 0.85rem;
     }
 
@@ -178,8 +178,6 @@
       font-weight: 600;
       letter-spacing: 0;
       text-decoration: none;
-      grid-column: 2;
-      margin-top: -0.7rem;
     }
 
     .nav {
@@ -281,6 +279,29 @@
       background: var(--paper);
       box-shadow: var(--shadow);
       backdrop-filter: blur(16px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::after,
+    .stat::after,
+    .feed::after,
+    .movement::after,
+    .donate::after {
+      content: "";
+      position: absolute;
+      top: 0.75rem;
+      right: 0.9rem;
+      width: 4.6rem;
+      height: 2.5rem;
+      opacity: 0.22;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 0.45rem 0.55rem, rgba(255, 255, 255, 0.9) 0 0.18rem, transparent 0.21rem),
+        radial-gradient(circle at 1.55rem 0.25rem, rgba(255, 255, 255, 0.75) 0 0.14rem, transparent 0.17rem),
+        radial-gradient(circle at 2.45rem 0.9rem, rgba(255, 255, 255, 0.8) 0 0.2rem, transparent 0.23rem),
+        radial-gradient(circle at 3.55rem 0.45rem, rgba(255, 255, 255, 0.65) 0 0.12rem, transparent 0.15rem),
+        radial-gradient(circle at 4.2rem 1.3rem, rgba(255, 255, 255, 0.7) 0 0.16rem, transparent 0.19rem);
     }
 
     .hero-copy {
@@ -449,6 +470,8 @@
       box-shadow: var(--shadow);
       backdrop-filter: blur(16px);
       transition: transform 160ms ease;
+      position: relative;
+      overflow: hidden;
     }
 
     .feed h3 {
@@ -593,10 +616,14 @@
     .donate {
       padding: 1.4rem;
       border-radius: var(--radius-xl);
-      border: 1px solid var(--line);
-      background: var(--paper-solid);
+      border: 1px solid rgba(255, 111, 111, 0.32);
+      background:
+        radial-gradient(circle at top right, rgba(255, 111, 111, 0.18), transparent 34%),
+        color-mix(in srgb, var(--paper-solid), rgba(172, 44, 44, 0.2) 28%);
       box-shadow: var(--shadow);
       backdrop-filter: blur(16px);
+      position: relative;
+      overflow: hidden;
     }
 
     .donate p {
